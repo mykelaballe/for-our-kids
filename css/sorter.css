@@ -1,0 +1,57 @@
+.hud{display:flex; align-items:center; justify-content:space-between; gap:10px 16px; flex-wrap:wrap}
+.hud h2{margin:0; font-family:var(--display); font-weight:800; font-size:clamp(20px,5vw,26px); line-height:1.1}
+.stat-pill{
+  display:flex; align-items:center; gap:8px; padding:8px 16px; border-radius:999px; background:var(--paper-2);
+  font-family:var(--display); font-weight:800; font-size:20px; font-variant-numeric:tabular-nums;
+}
+
+/* Playground */
+.playground{display:flex; flex-direction:column; gap:14px}
+.arena{
+  position:relative; overflow:hidden; height:clamp(320px, 52svh, 500px); border-radius:28px;
+  background:var(--paper-2); box-shadow:inset 0 0 0 3px var(--line);
+  touch-action:manipulation;
+}
+.sprite{
+  position:absolute; left:0; top:0; border:none; padding:0; background:none; cursor:pointer;
+  will-change:transform; transition:filter .2s;
+}
+.sprite svg{width:100%; height:100%; display:block; overflow:visible}
+.sprite.held{z-index:5; filter:drop-shadow(0 10px 0 rgba(43,35,64,.18))}
+.meetbar{
+  display:flex; flex-direction:column; align-items:center; text-align:center; gap:2px;
+  background:var(--ink); color:var(--paper); border-radius:22px; padding:12px 18px; min-height:84px; justify-content:center;
+}
+.meetbar b{font-family:var(--display); font-weight:800; font-size:clamp(28px,7vw,40px); line-height:1}
+.meetbar span{font-weight:700; font-size:clamp(15px,3.6vw,18px); text-wrap:balance}
+.met{font-weight:800; font-size:14px; color:var(--ink-soft); font-variant-numeric:tabular-nums}
+
+/* Sorter */
+.sorter{display:flex; flex-direction:column; align-items:center; gap:18px}
+.holes{
+  display:flex; flex-wrap:wrap; justify-content:center; gap:14px; width:100%;
+  background:var(--paper-2); border-radius:28px; padding:20px 14px; box-shadow:inset 0 -6px 0 rgba(43,35,64,.1);
+}
+.hole{
+  width:clamp(92px, 24vw, 130px); display:flex; flex-direction:column; align-items:center; gap:4px;
+  padding:10px 6px 8px; border-radius:20px; background:var(--paper); box-shadow:inset 0 4px 0 rgba(43,35,64,.14);
+  transition:background .2s;
+}
+.hole .hs{display:block; width:78%; aspect-ratio:1}
+.hole .hs svg{width:100%; height:100%; display:block}
+.hole .hl{font-weight:800; font-size:14px}
+.hole.filled{background:color-mix(in srgb, var(--good) 18%, var(--paper))}
+.tray{display:flex; flex-wrap:wrap; justify-content:center; gap:16px; width:100%; min-height:110px; padding:6px}
+.piece{
+  width:clamp(84px, 22vw, 116px); aspect-ratio:1; border:none; background:none; padding:0; touch-action:none; cursor:grab;
+  transition:transform .15s; position:relative;
+}
+.piece svg{width:100%; height:100%; display:block; filter:drop-shadow(0 6px 0 rgba(43,35,64,.18)); pointer-events:none}
+.piece.drag{z-index:20; cursor:grabbing}
+.piece.drag svg{filter:drop-shadow(0 14px 0 rgba(43,35,64,.2))}
+.piece.picked{transform:translateY(-12px) scale(1.1)}
+.piece.picked::after{content:""; position:absolute; inset:-6px; border-radius:50%; border:3px dashed var(--ink)}
+.shake{animation:shake .35s ease}
+.msg{margin:0; min-height:1.4em; font-family:var(--display); font-weight:800; font-size:22px; text-align:center; text-wrap:balance}
+@keyframes shake{25%{transform:translateX(-8px)} 75%{transform:translateX(8px)}}
+@media (prefers-reduced-motion: reduce){.shake{animation:none}.piece{transition:none}}

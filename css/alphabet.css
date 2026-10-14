@@ -1,0 +1,48 @@
+/* Learn: a three-card carousel. The middle card is the big one. */
+.carousel{
+  --cw:200px;
+  position:relative; width:100%; max-width:680px; margin:0 auto;
+  height:calc(var(--cw) * 1.3333 + 46px);
+  overflow:hidden; perspective:1100px;
+  touch-action:pan-y; cursor:grab; -webkit-user-select:none; user-select:none;
+}
+.carousel.dragging{cursor:grabbing}
+.ccard{
+  position:absolute; top:14px; left:50%;
+  width:var(--cw); margin-left:calc(var(--cw) / -2); aspect-ratio:3 / 4;
+  border:none; border-radius:calc(var(--cw) * .13); overflow:hidden;
+  padding:calc(var(--cw) * .06) calc(var(--cw) * .05) calc(var(--cw) * .07);
+  display:flex; flex-direction:column; align-items:center; justify-content:space-between;
+  transform-origin:50% 55%; will-change:transform, opacity;
+  transition:transform .4s cubic-bezier(.25,.9,.3,1), opacity .4s;
+}
+.carousel.dragging .ccard{transition:none}
+.ccard::before{
+  content:""; position:absolute; width:78%; aspect-ratio:1; border-radius:50%;
+  top:12%; left:11%; background:rgba(255,255,255,.38); pointer-events:none;
+}
+.ccard > *{position:relative}
+.cl{
+  font-family:var(--display); font-weight:800; line-height:.9; letter-spacing:.02em;
+  font-size:calc(var(--cw) * .34);
+}
+.cl small{font-size:.72em}
+.ce{font-size:calc(var(--cw) * .34); line-height:1; filter:drop-shadow(0 4px 0 rgba(0,0,0,.08))}
+.cn{
+  font-family:var(--display); font-weight:800; line-height:1; text-align:center; text-wrap:balance;
+  font-size:calc(var(--cw) * .15);
+}
+.cb{
+  background:#fff; color:var(--card-ink); border-radius:calc(var(--cw) * .07); padding:.1em .6em;
+  font-family:var(--display); font-weight:600; line-height:1.3; text-align:center;
+  font-size:calc(var(--cw) * .078); transition:opacity .3s;
+}
+.ccard:not(.on) .cb{opacity:0}
+.ccard.pop .ce{animation:wiggle .7s ease}
+.ccard.speaking .cb{animation:bubble .45s ease}
+.first{background:#fff; border-radius:.2em; padding:0 .12em; margin-right:.03em}
+.thumb.abc{font-family:var(--display); font-weight:800; font-size:34px; color:var(--card-ink)}
+@media (prefers-reduced-motion: reduce){
+  .ccard{transition:none}
+  .ccard.pop .ce,.ccard.speaking .cb{animation:none}
+}

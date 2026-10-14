@@ -1,0 +1,8 @@
+.card .hero.shape svg{width:clamp(120px,32vw,200px); height:auto; overflow:visible}
+.card .hero.shape{filter:drop-shadow(0 8px 0 rgba(0,0,0,.1))}
+.card .bubble{max-width:100%}
+.thumb svg{width:60%; height:60%}
+.prompt .ps svg{width:clamp(130px,36vw,210px); height:auto; display:block; margin:8px auto 4px}
+.choice.shape svg{width:62%; height:62%}
+.choices.list{grid-template-columns:1fr}
+.choices.list .choice{aspect-ratio:auto; height:clamp(64px,16vw,84px); font-size:clamp(26px,7vw,38px)}

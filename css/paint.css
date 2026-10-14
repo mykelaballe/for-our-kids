@@ -1,0 +1,76 @@
+.hud{display:flex; align-items:center; justify-content:space-between; gap:10px 16px; flex-wrap:wrap}
+.stat-pill{
+  display:flex; align-items:center; gap:8px; padding:8px 16px; border-radius:999px; background:var(--paper-2);
+  font-family:var(--display); font-weight:800; font-size:20px; font-variant-numeric:tabular-nums;
+}
+
+/* Paint studio */
+.studio{display:flex; flex-direction:column; gap:16px}
+.canvas-wrap{
+  position:relative; border-radius:28px; overflow:hidden; background:#FBF7EE;
+  box-shadow:0 8px 0 rgba(43,35,64,.2), var(--lift);
+}
+#paintCanvas{display:block; width:100%; height:clamp(240px, 44svh, 460px); touch-action:none; cursor:crosshair}
+.paint-hint{
+  position:absolute; inset:0; display:grid; place-items:center; padding:24px; text-align:center; pointer-events:none;
+  font-family:var(--display); font-weight:800; font-size:clamp(22px,5vw,32px); line-height:1.15; color:#B5AAC8;
+  transition:opacity .4s;
+}
+.paint-hint.gone{opacity:0}
+.pots{display:grid; grid-template-columns:repeat(5, 1fr); gap:14px 8px; max-width:560px; margin:0 auto; width:100%}
+.pot{border:none; background:none; padding:0; position:relative; display:flex; flex-direction:column; align-items:center; gap:6px}
+.pot .blob{
+  display:block; width:100%; max-width:70px; aspect-ratio:1; border-radius:50%; background:var(--s);
+  box-shadow:inset 0 -7px 0 rgba(0,0,0,.14), 0 0 0 3px rgba(255,255,255,.85), 0 0 0 4px rgba(43,35,64,.2);
+  transition:transform .15s;
+}
+.pot:active .blob{transform:scale(.9)}
+.pot[aria-pressed="true"] .blob{transform:scale(1.14); box-shadow:inset 0 -7px 0 rgba(0,0,0,.14), 0 0 0 4px var(--paper), 0 0 0 8px var(--ink)}
+.pot .lbl{font-weight:800; font-size:13px}
+.pot.seen::after{
+  content:"★"; position:absolute; top:-4px; right:calc(50% - 40px); width:22px; height:22px; border-radius:50%;
+  display:grid; place-items:center; font-size:13px; color:#fff; background:var(--sun);
+  box-shadow:0 2px 0 rgba(0,0,0,.18);
+}
+.tools-row{display:flex; gap:10px; align-items:center; justify-content:center; flex-wrap:wrap}
+.size{
+  width:50px; height:50px; border-radius:50%; border:2px solid var(--line); background:var(--paper-2);
+  display:grid; place-items:center;
+}
+.size i{display:block; border-radius:50%; background:var(--ink)}
+.size[aria-pressed="true"]{border-color:var(--ink)}
+
+/* Balloon sky */
+.goal{display:flex; align-items:center; gap:10px; font-family:var(--display); font-weight:800; font-size:clamp(20px,5vw,28px); line-height:1.1}
+.gsw{
+  flex:none; width:38px; height:38px; border-radius:50%; background:var(--s, #E53935);
+  box-shadow:inset 0 -5px 0 rgba(0,0,0,.14), 0 0 0 3px rgba(255,255,255,.85), 0 0 0 4px rgba(43,35,64,.2);
+}
+.pips{display:flex; gap:6px}
+.pip{width:20px; height:20px; border-radius:50%; background:var(--paper-2); border:2px solid var(--line); transition:background .2s}
+.pip.on{background:var(--good); border-color:var(--good)}
+.sky{
+  position:relative; overflow:hidden; border-radius:28px; touch-action:manipulation;
+  height:clamp(320px, 54svh, 520px);
+  background:var(--sky);
+  box-shadow:0 8px 0 rgba(43,35,64,.2), var(--lift);
+}
+.balloon{
+  position:absolute; left:0; top:0; border:none; padding:0; background:none; cursor:pointer;
+  width:var(--sz); height:calc(var(--sz) * 1.25); will-change:transform;
+}
+.balloon .body{
+  position:absolute; inset:0 0 18% 0; display:block; transform-origin:50% 100%;
+  border-radius:50% 50% 48% 48% / 56% 56% 44% 44%;
+  background:radial-gradient(circle at 32% 27%, rgba(255,255,255,.7) 0 13%, transparent 14%), var(--b);
+  box-shadow:inset -7px -9px 0 rgba(0,0,0,.14), 0 0 0 2px rgba(43,35,64,.14);
+}
+.balloon::after{ /* string */
+  content:""; position:absolute; left:50%; top:80%; width:2px; height:34%; background:rgba(43,35,64,.4); transform:translateX(-1px);
+}
+.balloon.popping .body{animation:burst .26s ease-out forwards}
+.balloon.popping::after{opacity:0}
+.balloon.wobble .body{animation:wobble .4s ease}
+@keyframes burst{40%{transform:scale(1.3)} 100%{transform:scale(1.8); opacity:0}}
+@keyframes wobble{20%{transform:rotate(-14deg)} 50%{transform:rotate(12deg)} 80%{transform:rotate(-6deg)}}
+@media (prefers-reduced-motion: reduce){.balloon.popping .body{animation:none; opacity:0}.balloon.wobble .body{animation:none}}

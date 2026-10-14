@@ -1,0 +1,179 @@
+/* Play Time. Toy-box look: warm paper ground, one big saturated card at a time,
+   chunky rounded type, every colored object sits on a darker "edge" like a wooden block. */
+:root{
+  --paper:#FFF8EC;
+  --paper-2:#F3E8D6;
+  --line:#E6D7BF;
+  --ink:#2B2340;
+  --ink-soft:#6B6283;
+  --sun:#F2994A;
+  --good:#2FA84F;
+  --focus:#2F6FEB;
+  --card-ink:#2B2340;
+  --lift:0 22px 40px rgba(43,35,64,.16);
+  --sky:linear-gradient(#8EC9FF, #DDF0FF 72%, #CDEFBF);
+  --display:"Baloo 2","Arial Rounded MT Bold","Trebuchet MS",system-ui,sans-serif;
+  --body:"Nunito","Avenir Next","Segoe UI",system-ui,sans-serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#1C1828; --paper-2:#272137; --line:#3A3250;
+    --ink:#FBF4E6; --ink-soft:#B9AFCF; --sun:#FFB067; --focus:#8FB3FF;
+    --lift:0 22px 40px rgba(0,0,0,.45);
+    --sky:linear-gradient(#1B2556, #36498A 70%, #2A4A3A);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#1C1828; --paper-2:#272137; --line:#3A3250;
+  --ink:#FBF4E6; --ink-soft:#B9AFCF; --sun:#FFB067; --focus:#8FB3FF;
+  --lift:0 22px 40px rgba(0,0,0,.45);
+  --sky:linear-gradient(#1B2556, #36498A 70%, #2A4A3A);
+  color-scheme:dark;
+}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;
+  background:var(--paper); color:var(--ink);
+  font-family:var(--body); font-size:16px; line-height:1.4;
+  padding-left:max(16px, env(safe-area-inset-left,0px));
+  padding-right:max(16px, env(safe-area-inset-right,0px));
+  padding-block:max(16px, env(safe-area-inset-top,0px)) max(32px, env(safe-area-inset-bottom,0px));
+  -webkit-tap-highlight-color:transparent;
+  overscroll-behavior:none;
+  transition:background-color .3s, color .3s;
+}
+[hidden]{display:none!important}
+button{font:inherit; color:inherit; cursor:pointer; -webkit-user-select:none; user-select:none}
+:focus-visible{outline:3px solid var(--focus); outline-offset:3px}
+.wrap{max-width:920px; margin:0 auto; display:flex; flex-direction:column; gap:18px}
+
+/* Top bar */
+.bar{display:flex; align-items:center; gap:10px}
+.bar h1{
+  flex:1; min-width:0; margin:0;
+  font-family:var(--display); font-weight:800; line-height:1; letter-spacing:-.01em;
+  font-size:clamp(26px,5vw,38px); text-wrap:balance;
+}
+.bar h1 span{color:var(--sun)}
+.icon-btn{
+  width:48px; height:48px; flex:none; display:grid; place-items:center;
+  border-radius:50%; border:2px solid var(--line); background:var(--paper-2); color:var(--ink);
+  text-decoration:none; transition:transform .12s;
+}
+.icon-btn:active{transform:scale(.9)}
+ .i-sun{display:none}
+[data-theme-toggle].is-dark .i-sun{display:block}
+[data-theme-toggle].is-dark .i-moon{display:none}
+
+/* Chip row (groups, modes). Scrolls sideways on phones instead of wrapping into a pile. */
+.chips{
+  display:flex; gap:8px; overflow-x:auto; scrollbar-width:none;
+  padding:4px 4px 10px; margin-inline:-4px;
+}
+.chips::-webkit-scrollbar{display:none}
+.chip{
+  flex:none; display:flex; align-items:center; gap:8px; white-space:nowrap;
+  border:none; border-radius:18px; padding:10px 16px;
+  font-weight:800; font-size:16px; background:var(--paper-2);
+  transition:transform .12s;
+}
+.chip:active{transform:scale(.95)}
+.chip .e{font-size:22px; line-height:1}
+.chip[aria-pressed="true"]{background:var(--ink); color:var(--paper)}
+
+/* Colored chunky objects: fill from --c, edge a darker shade of the same color. */
+.chunky{
+  --edge:rgba(43,35,64,.22);
+  background:var(--c, #F2C94C); color:var(--card-ink);
+  box-shadow:0 10px 0 var(--edge), var(--lift);
+}
+@supports (color: color-mix(in srgb, red, blue)){
+  .chunky{--edge:color-mix(in srgb, var(--c, #F2C94C) 70%, #4a3550)}
+}
+
+.hint{margin:0; text-align:center; color:var(--ink-soft); font-weight:700; font-size:14px; text-wrap:balance}
+
+/* Grown-ups settings sheet */
+dialog.sheet{
+  border:none; border-radius:28px; padding:0;
+  width:min(440px, calc(100% - 32px)); max-height:calc(100% - 32px);
+  background:var(--paper); color:var(--ink); box-shadow:var(--lift);
+}
+dialog.sheet::backdrop{background:rgba(28,24,40,.5)}
+.sheet-in{padding:22px; display:flex; flex-direction:column; gap:6px}
+.sheet h2{font-family:var(--display); font-weight:800; font-size:26px; margin:0; line-height:1.1}
+.sheet .note{margin:0 0 8px; color:var(--ink-soft); font-size:14px}
+.opt{
+  display:flex; align-items:center; justify-content:space-between; gap:14px;
+  padding:12px 0; border-bottom:1px solid var(--line); font-weight:700; cursor:pointer;
+}
+.opt input[type="checkbox"]{
+  appearance:none; -webkit-appearance:none; margin:0; flex:none; cursor:pointer;
+  width:52px; height:30px; border-radius:999px; background:var(--line); position:relative;
+  transition:background .2s;
+}
+.opt input[type="checkbox"]::after{
+  content:""; position:absolute; top:3px; left:3px; width:24px; height:24px; border-radius:50%;
+  background:#fff; box-shadow:0 1px 3px rgba(0,0,0,.25); transition:transform .2s;
+}
+.opt input[type="checkbox"]:checked{background:var(--good)}
+.opt input[type="checkbox"]:checked::after{transform:translateX(22px)}
+.seg{display:flex; gap:4px; padding:4px; border-radius:999px; background:var(--paper-2); flex:none}
+.seg label{position:relative; cursor:pointer}
+.seg input{position:absolute; inset:0; opacity:0; margin:0; cursor:pointer}
+.seg span{display:block; padding:6px 14px; border-radius:999px; font-weight:800; font-variant-numeric:tabular-nums}
+.seg input:checked + span{background:var(--ink); color:var(--paper)}
+.seg input:focus-visible + span{outline:3px solid var(--focus); outline-offset:2px}
+.sheet-actions{display:flex; gap:10px; justify-content:space-between; flex-wrap:wrap; margin-top:14px}
+.btn{border:none; border-radius:999px; padding:12px 20px; font-weight:800; background:var(--ink); color:var(--paper)}
+.btn.quiet{background:var(--paper-2); color:var(--ink)}
+.btn.armed{background:#C8443A; color:#fff}
+
+/* Celebrations */
+.confetti{position:fixed; inset:0; width:100%; height:100%; pointer-events:none; z-index:50}
+.badge{
+  position:fixed; left:50%; top:38%; z-index:51; pointer-events:none;
+  transform:translate(-50%,-50%); max-width:calc(100% - 32px);
+  background:var(--ink); color:var(--paper); box-shadow:var(--lift);
+  font-family:var(--display); font-weight:800; font-size:clamp(24px,6vw,38px); line-height:1.15;
+  padding:14px 28px; border-radius:24px; text-align:center; text-wrap:balance;
+  animation:badge 2.4s ease forwards;
+}
+@keyframes badge{
+  0%{opacity:0; transform:translate(-50%,-30%) scale(.8)}
+  12%{opacity:1; transform:translate(-50%,-50%) scale(1.06)}
+  20%{transform:translate(-50%,-50%) scale(1)}
+  85%{opacity:1}
+  100%{opacity:0; transform:translate(-50%,-62%)}
+}
+@media (prefers-reduced-motion: reduce){
+  .badge{animation:none}
+  .chip,.icon-btn{transition:none}
+}
+
+/* Play timer */
+.timer-btn{width:auto; min-width:48px; padding:0 14px; gap:8px; display:flex; align-items:center; justify-content:center}
+.timer-btn .t{display:none; font-family:var(--display); font-weight:800; font-size:16px; font-variant-numeric:tabular-nums}
+.timer-btn.on{background:var(--ink); color:var(--paper); border-color:var(--ink)}
+.timer-btn.on .t{display:inline}
+.dur{display:flex; flex-wrap:wrap; gap:8px; padding:6px 0 4px}
+.dur .chip{background:var(--paper-2)}
+.gate-q{font-family:var(--display); font-weight:800; font-size:26px; margin-top:4px}
+.gate-in{
+  font:inherit; font-size:24px; font-weight:800; width:100%; padding:12px 16px; border-radius:16px;
+  border:2px solid var(--line); background:var(--paper-2); color:var(--ink); font-variant-numeric:tabular-nums;
+}
+.gate-err{margin:0; min-height:1.3em; color:#C8443A; font-weight:700; font-size:14px}
+.timelock{
+  position:fixed; inset:0; z-index:1000; display:grid; place-items:center; padding:24px; text-align:center;
+  background:var(--paper); color:var(--ink);
+}
+.timelock-in{display:flex; flex-direction:column; align-items:center; gap:14px; max-width:420px}
+.timelock .moon{font-size:clamp(100px,30vw,170px); line-height:1}
+.timelock h2{margin:0; font-family:var(--display); font-weight:800; font-size:clamp(38px,10vw,64px); line-height:1}
+.timelock p{margin:0; font-weight:700; font-size:clamp(18px,4vw,22px); color:var(--ink-soft)}
+.timelock .btn{margin-top:18px}
