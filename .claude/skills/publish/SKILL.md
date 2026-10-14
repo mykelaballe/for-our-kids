@@ -1,10 +1,10 @@
 ---
-name: deploy
-description: Push the committed changes to the main branch of the GitHub repo, which deploys the live site on Vercel. Use only when the user runs /deploy.
+name: publish
+description: Push the committed changes to the main branch of the GitHub repo, which deploys the live site on Vercel. Use only when the user runs /publish.
 disable-model-invocation: true
 ---
 
-Deploy Play Time by pushing `main` to GitHub. Vercel builds and publishes from that branch automatically.
+Publish Play Time by pushing `main` to GitHub. Vercel builds and publishes from that branch automatically.
 
 1. Run `git status -sb`. If there are uncommitted changes, commit them first with a clear message that ends with the commit attribution line. Do not push a dirty tree.
 2. Check the current branch is `main`. If it is not, stop and tell the user. Do not switch branches or force anything.

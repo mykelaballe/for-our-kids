@@ -4,7 +4,7 @@ A static web app of toddler learning games, built for the owner's kids. Plain HT
 
 ## Git workflow
 - **After every response that changes files, commit the changes.** Do not wait to be asked, and do not leave work uncommitted. Use a short message that says what changed and why, and end it with the attribution line for the commit.
-- Commit only. Do not push on your own. Pushing to `main` deploys the live site, so it only happens when the user runs `/deploy`.
+- Commit only. Do not push on your own. Pushing to `main` deploys the live site, so it only happens when the user runs `/publish`.
 - If a response changed no files, there is nothing to commit.
 
 ## Working rules
