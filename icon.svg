@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <title>Play Time</title>
+  <rect width="512" height="512" rx="112" fill="#F2C94C"/>
+
+  <g>
+    <circle cx="124" cy="156" r="64" fill="#B9793F"/><circle cx="124" cy="156" r="34" fill="#F0C9A0"/>
+    <circle cx="388" cy="156" r="64" fill="#B9793F"/><circle cx="388" cy="156" r="34" fill="#F0C9A0"/>
+    <circle cx="256" cy="282" r="176" fill="#D9A066"/>
+    <ellipse cx="256" cy="336" rx="84" ry="62" fill="#F7E4C8"/>
+    <circle cx="160" cy="322" r="24" fill="#FF8FAF" opacity=".75"/><circle cx="352" cy="322" r="24" fill="#FF8FAF" opacity=".75"/>
+    <circle cx="200" cy="250" r="20" fill="#2B2340"/><circle cx="312" cy="250" r="20" fill="#2B2340"/>
+    <circle cx="207" cy="243" r="7" fill="#fff"/><circle cx="319" cy="243" r="7" fill="#fff"/>
+    <ellipse cx="256" cy="308" rx="30" ry="21" fill="#2B2340"/>
+    <path d="M256 328v22M256 350c-20 22-46 20-58 4M256 350c20 22 46 20 58 4" fill="none" stroke="#2B2340" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M96 78c4 22 10 28 32 32-22 4-28 10-32 32-4-22-10-28-32-32 22-4 28-10 32-32z" fill="#fff"/>
+    <path d="M430 372c3 14 7 18 21 21-14 3-18 7-21 21-3-14-7-18-21-21 14-3 18-7 21-21z" fill="#fff" opacity=".9"/>
+  </g>
+</svg>
