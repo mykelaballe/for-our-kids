@@ -14,6 +14,8 @@
   };
   $("#colorStat").textContent = stat(data.colors, COLORS.length, `${COLORS.length} colors`);
   $("#numberStat").textContent = stat(data.numbers, NUMBERS.length, "1 to 10");
+  const sliceWins = data.slice.wins;
+  $("#sliceStat").textContent = sliceWins ? `🏆 ${sliceWins} win${sliceWins === 1 ? "" : "s"}` : "Swipe to slice";
   const dotWins = data.dots.wins;
   $("#dotsStat").textContent = dotWins ? `🏆 ${dotWins} picture${dotWins === 1 ? "" : "s"}` : "1, 2, 3...";
   const shadowWins = data.shadow.wins;

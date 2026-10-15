@@ -1,0 +1,22 @@
+.chip small{font-weight:700; font-size:12px; opacity:.7}
+.play{display:flex; flex-direction:column; align-items:center; gap:14px}
+.score{display:flex; justify-content:center; gap:10px; flex-wrap:wrap}
+.stat-pill{
+  display:flex; align-items:center; gap:8px; padding:8px 16px; border-radius:999px; background:var(--paper-2);
+  font-family:var(--display); font-weight:800; font-size:20px; font-variant-numeric:tabular-nums;
+}
+.hint{margin:0; font-family:var(--display); font-weight:800; font-size:22px; text-align:center; text-wrap:balance}
+
+/* The play field is a canvas the fruit flies across. A fixed night-sky look in both themes so the juice always shows. */
+.field{
+  width:min(100%, 480px, calc((100svh - 360px) * .75)); min-width:260px; aspect-ratio:3 / 4;
+  border-radius:24px; overflow:hidden; box-shadow:0 6px 0 rgba(43,35,64,.22);
+  background:linear-gradient(#5B4B9A, #8E7CC3 60%, #C9A7E8);
+}
+.field canvas{display:block; width:100%; height:100%; touch-action:none; -webkit-user-select:none; user-select:none; cursor:crosshair}
+
+.result{
+  display:flex; flex-direction:column; align-items:center; gap:12px; text-align:center;
+  background:var(--paper-2); border-radius:24px; padding:18px 22px; width:min(100%, 420px);
+}
+.result-text{margin:0; font-family:var(--display); font-weight:800; font-size:26px; line-height:1.15; text-wrap:balance}
