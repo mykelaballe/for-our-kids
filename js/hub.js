@@ -12,7 +12,7 @@
     const stars = g.stars, seen = Object.keys(g.seen).length;
     return stars ? `⭐ ${stars} star${stars === 1 ? "" : "s"}` : seen ? `★ ${Math.min(seen, total)} of ${total} seen` : idle;
   };
-  $("#colorStat").textContent = stat(data.colors, COLORS.length, "10 colors");
+  $("#colorStat").textContent = stat(data.colors, COLORS.length, `${COLORS.length} colors`);
   $("#numberStat").textContent = stat(data.numbers, NUMBERS.length, "1 to 10");
   const wins = data.memory.wins;
   $("#memoryStat").textContent = wins ? `🏆 ${wins} win${wins === 1 ? "" : "s"}` : "Find the pairs";

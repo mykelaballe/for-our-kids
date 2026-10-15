@@ -118,7 +118,13 @@ const SHAPES = [
   ["diamond", "Diamond", "4 equal sides, standing on a point. Like a kite!", "#FFB37A", "#2D9CDB"],
   ["pentagon", "Pentagon", "5 sides. Like a baseball home plate!", "#C6E59B", "#9B51E0"],
   ["hexagon", "Hexagon", "6 sides. Like a honeycomb!", "#FFE0B8", "#F2994A"],
-  ["octagon", "Octagon", "8 sides. Like a stop sign!", "#CFD8E6", "#EB5757"]
+  ["octagon", "Octagon", "8 sides. Like a stop sign!", "#CFD8E6", "#EB5757"],
+  ["crescent", "Crescent", "Curved, with two points. Like the moon!", "#D9C6EF", "#F2C94C"],
+  ["plus", "Plus", "4 arms that are all the same. Like a plus sign!", "#C6E59B", "#EB5757"],
+  ["arrow", "Arrow", "It points the way. Like a road sign!", "#A8E4F2", "#27AE60"],
+  ["trapezoid", "Trapezoid", "4 sides, and the top is shorter than the bottom. Like a bucket!", "#FFD59A", "#9B51E0"],
+  ["parallelogram", "Parallelogram", "4 sides, leaning to one side. Like a slanted rectangle!", "#FFC9A3", "#2F80ED"],
+  ["semicircle", "Semicircle", "Half of a circle. Like a slice of watermelon!", "#FFE27A", "#EB5757"]
 ];
 const SHAPE_PATHS = {
   circle:'<circle cx="50" cy="50" r="40"/>',
@@ -131,7 +137,13 @@ const SHAPE_PATHS = {
   diamond:'<polygon points="50,6 90,50 50,94 10,50"/>',
   pentagon:'<polygon points="50,8 92,38 76,88 24,88 8,38"/>',
   hexagon:'<polygon points="27,10 73,10 96,50 73,90 27,90 4,50"/>',
-  octagon:'<polygon points="32,6 68,6 94,32 94,68 68,94 32,94 6,68 6,32"/>'
+  octagon:'<polygon points="32,6 68,6 94,32 94,68 68,94 32,94 6,68 6,32"/>',
+  crescent:'<path d="M75.9 16.9 A42 42 0 1 0 75.9 83.1 A34 34 0 1 1 75.9 16.9 Z"/>',
+  plus:'<polygon points="35,8 65,8 65,35 92,35 92,65 65,65 65,92 35,92 35,65 8,65 8,35 35,35"/>',
+  arrow:'<polygon points="6,36 56,36 56,14 94,50 56,86 56,64 6,64"/>',
+  trapezoid:'<polygon points="30,22 70,22 94,78 6,78"/>',
+  parallelogram:'<polygon points="26,24 94,24 74,76 6,76"/>',
+  semicircle:'<path d="M6 72 A44 44 0 0 1 94 72 Z"/>'
 };
 // The picture of a shape as inline SVG, so it scales crisply and takes any color.
 const shapeSvg = (id, fill) =>
@@ -164,6 +176,7 @@ const COLORS = [
   ["purple", "Purple", "#8E24AA", "#E3D0F7", "🍇", "grapes"],
   ["pink", "Pink", "#FF6FA5", "#FFD3E4", "🌸", "a flower"],
   ["brown", "Brown", "#8D5A2B", "#E8D2B8", "🐻", "a bear"],
+  ["gray", "Gray", "#9AA0A6", "#E4E6EA", "🐭", "a mouse"],
   ["black", "Black", "#2B2B33", "#D9D9E0", "🦇", "a bat"],
   ["white", "White", "#FFFFFF", "#E3EDF8", "☁️", "a cloud"]
 ];
