@@ -14,6 +14,8 @@
   };
   $("#colorStat").textContent = stat(data.colors, COLORS.length, `${COLORS.length} colors`);
   $("#numberStat").textContent = stat(data.numbers, NUMBERS.length, "1 to 10");
+  const spins = data.wheel.spins;
+  $("#wheelStat").textContent = spins ? `🎡 ${spins} spin${spins === 1 ? "" : "s"}` : "Spin and see";
   const mazeWins = data.maze.wins;
   $("#mazeStat").textContent = mazeWins ? `🏆 ${mazeWins} win${mazeWins === 1 ? "" : "s"}` : "Find the way";
   const wins = data.memory.wins;

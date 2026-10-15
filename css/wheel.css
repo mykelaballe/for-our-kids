@@ -1,0 +1,36 @@
+.play{display:flex; flex-direction:column; align-items:center; gap:14px}
+.score{display:flex; justify-content:center; gap:10px; flex-wrap:wrap}
+.stat-pill{
+  display:flex; align-items:center; gap:8px; padding:8px 16px; border-radius:999px; background:var(--paper-2);
+  font-family:var(--display); font-weight:800; font-size:20px; font-variant-numeric:tabular-nums;
+}
+.hint{margin:0; font-family:var(--display); font-weight:800; font-size:22px; text-align:center; text-wrap:balance}
+.btn.big{font-family:var(--display); font-size:28px; padding:10px 44px}
+.btn:disabled{opacity:.5; cursor:default}
+
+.wheel{
+  display:block; width:min(100%, 440px, max(260px, calc(100svh - 400px))); aspect-ratio:1;
+  touch-action:manipulation; -webkit-user-select:none; user-select:none; cursor:pointer; overflow:visible;
+}
+.wheel .rim{fill:var(--ink)}
+.wheel .slice{stroke:var(--paper); stroke-width:2}
+.wheel .lab{text-anchor:middle; dominant-baseline:central; font-size:26px; pointer-events:none}
+.wheel .lab.num{font-family:var(--display); font-weight:800; font-size:30px; fill:var(--card-ink)}
+.wheel .hub{fill:var(--paper); stroke:var(--ink); stroke-width:4}
+.wheel .pointer{fill:var(--sun); stroke:var(--ink); stroke-width:4; stroke-linejoin:round}
+.wheel:focus-visible{outline:4px solid var(--focus); outline-offset:6px; border-radius:50%}
+
+/* The thing the wheel landed on */
+.prize{
+  display:flex; align-items:center; gap:14px; padding:10px 22px 10px 12px; border-radius:999px;
+  background:var(--c); color:var(--card-ink); box-shadow:0 6px 0 rgba(43,35,64,.22);
+  animation:pop-in .4s cubic-bezier(.3,1.5,.5,1);
+}
+.prize .face{display:grid; place-items:center; width:64px; height:64px; font-size:46px; line-height:1;
+  font-family:var(--display); font-weight:800; border-radius:50%; background:rgba(255,255,255,.6)}
+.prize .face svg{width:70%; height:70%}
+.prize .face .sw{display:block; width:70%; aspect-ratio:1; border-radius:50%; background:var(--s);
+  box-shadow:0 0 0 3px rgba(255,255,255,.8)}
+.prize .name{font-family:var(--display); font-weight:800; font-size:30px; line-height:1}
+@keyframes pop-in{from{transform:scale(.6); opacity:0}}
+@media (prefers-reduced-motion: reduce){.prize{animation:none}}
