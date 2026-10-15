@@ -137,21 +137,21 @@ const SHAPE_PATHS = {
 const shapeSvg = (id, fill) =>
   `<svg viewBox="0 0 100 100" aria-hidden="true" fill="${fill}" stroke="rgba(43,35,64,.3)" stroke-width="3" stroke-linejoin="round">${SHAPE_PATHS[id]}</svg>`;
 
-/* Princesses: [name, emoji for her signature item, card color].
-   There is no official artwork here: each princess is shown by something she is known for. */
+/* Princesses: [name, picture file in img/princesses, card color].
+   The pictures are cropped from a wallpaper supplied by the owner (see CLAUDE.md). */
 const PRINCESSES = [
-  ["Cinderella", "👠", "#B5DCF7"],
-  ["Snow White", "🍎", "#FFC1C1"],
-  ["Belle", "🌹", "#FFE27A"],
-  ["Ariel", "🐚", "#B8F0D6"],
-  ["Aurora", "💤", "#F7C6E3"],
-  ["Jasmine", "🪔", "#9FE0E0"],
-  ["Mulan", "🐉", "#FFC9A3"],
-  ["Tiana", "🐸", "#B8F08A"],
-  ["Rapunzel", "🌼", "#FFF0A8"],
-  ["Moana", "🌊", "#9FD3FF"],
-  ["Elsa", "❄️", "#CFE9FF"],
-  ["Merida", "🏹", "#FFB37A"]
+  ["Cinderella", "cinderella", "#A9D8F2"],
+  ["Snow White", "snow-white", "#FFF08A"],
+  ["Pocahontas", "pocahontas", "#CDB4E6"],
+  ["Belle", "belle", "#FFF08A"],
+  ["Moana", "moana", "#F58FA0"],
+  ["Merida", "merida", "#A9D8F2"],
+  ["Mulan", "mulan", "#B8E39B"],
+  ["Rapunzel", "rapunzel", "#F7A8C8"],
+  ["Jasmine", "jasmine", "#CDB4E6"],
+  ["Aurora", "aurora", "#F7A8C8"],
+  ["Ariel", "ariel", "#F58FA0"],
+  ["Tiana", "tiana", "#B8E39B"]
 ];
 
 /* Colors: [id, name, color, card color, example emoji, "like ..." phrase] */

@@ -21,4 +21,4 @@ A static web app of toddler learning games, built for the owner's kids. Plain HT
 - Progress and settings are saved in `localStorage` under `playtime.v2`.
 
 ## Content
-To add an animal, letter, shape or princess, edit `js/data.js`. Animal sound keys are defined in `js/audio.js`. There is no official character artwork, so characters are shown with emoji.
+To add an animal, letter, shape or princess, edit `js/data.js`. Animal sound keys are defined in `js/audio.js`. The princess cards in Match Up use pictures in `img/princesses/`, cropped from a Disney wallpaper the owner supplied, so they are copyrighted. Keep the GitHub repo private and do not share the site link publicly. Everywhere else, characters are shown with emoji.

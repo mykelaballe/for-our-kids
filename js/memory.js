@@ -19,7 +19,8 @@
     },
     letters: () => LETTERS.map(([L, word, emoji, bg]) => ({ key:"l:" + L, name:word, say:`${L} is for ${word}`, face:emoji, bg })),
     shapes: () => SHAPES.map(([id, name, , bg, fill]) => ({ key:"s:" + id, name, face:shapeSvg(id, fill), bg })),
-    princesses: () => PRINCESSES.map(([name, emoji, bg]) => ({ key:"p:" + name, name, face:emoji, bg })),
+    princesses: () => PRINCESSES.map(([name, file, bg]) => ({ key:"p:" + name, name, bg, photo:true,
+      face:`<img src="img/princesses/${file}.jpg" alt="" draggable="false">` })),
     colors: () => COLORS.map(([id, name, hex, bg]) => ({ key:"c:" + id, name, face:`<span class="sw" style="--s:${hex}"></span>`, bg }))
   };
 
@@ -51,6 +52,7 @@
       b.setAttribute("aria-label", `Card ${k + 1}, face down`);
       b.innerHTML = `<span class="in"><span class="back" aria-hidden="true">?</span><span class="face" aria-hidden="true">${c.face}</span></span>`;
       b.querySelector(".face").style.setProperty("--c", c.bg);
+      if (c.photo) b.querySelector(".face").classList.add("photo");
       b.addEventListener("click", () => flip(k, b));
       c.el = b;
       board.appendChild(b);
