@@ -23,7 +23,8 @@
       face:`<img src="img/sofia/sofia-${k}.jpg" alt="" draggable="false">` })),
     princesses: () => PRINCESSES.map(([name, file, bg]) => ({ key:"p:" + name, name, bg, photo:true,
       face:`<img src="img/princesses/${file}.jpg" alt="" draggable="false">` })),
-    colors: () => COLORS.map(([id, name, hex, bg]) => ({ key:"c:" + id, name, face:`<span class="sw" style="--s:${hex}"></span>`, bg }))
+    colors: () => COLORS.map(([id, name, hex, bg]) => ({ key:"c:" + id, name, face:`<span class="sw" style="--s:${hex}"></span>`, bg })),
+    produce: () => PRODUCE.map(([name, emoji, bg]) => ({ key:"f:" + name, name, face:emoji, bg }))
   };
 
   const board = $("#board");

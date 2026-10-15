@@ -193,3 +193,12 @@ const NUMBERS = [
   [9, "Nine", "🐟", "fish", "fish", "#CFE9F5"],
   [10, "Ten", "🍓", "strawberry", "strawberries", "#FFD0D8"]
 ];
+
+/* Fruits and vegetables for Match Up: [name, emoji, card color] */
+const PRODUCE = [
+  ["Apple", "🍎", "#FFD0D0"], ["Banana", "🍌", "#FFF0A8"], ["Grapes", "🍇", "#E3D0F7"], ["Strawberry", "🍓", "#FFD0D8"],
+  ["Orange", "🍊", "#FFDDB8"], ["Watermelon", "🍉", "#C4EBCF"], ["Pineapple", "🍍", "#FFE9A8"], ["Cherries", "🍒", "#FFD3E4"],
+  ["Pear", "🍐", "#DDEFB5"], ["Lemon", "🍋", "#FFF4B0"], ["Carrot", "🥕", "#FFDDB8"], ["Broccoli", "🥦", "#C4EBCF"],
+  ["Corn", "🌽", "#FFF0A8"], ["Tomato", "🍅", "#FFD0D0"], ["Potato", "🥔", "#E8D2B8"], ["Eggplant", "🍆", "#E3D0F7"],
+  ["Cucumber", "🥒", "#CFEBD2"]
+];
