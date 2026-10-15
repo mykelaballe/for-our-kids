@@ -19,12 +19,15 @@
     },
     letters: () => LETTERS.map(([L, word, emoji, bg]) => ({ key:"l:" + L, name:word, say:`${L} is for ${word}`, face:emoji, bg })),
     shapes: () => SHAPES.map(([id, name, , bg, fill]) => ({ key:"s:" + id, name, face:shapeSvg(id, fill), bg })),
+    sofia: () => [1, 2, 3, 4].map(k => ({ key:"sofia-" + k, name:"Sofia", bg:"#FFE9A8", photo:true,
+      face:`<img src="img/sofia/sofia-${k}.jpg" alt="" draggable="false">` })),
     princesses: () => PRINCESSES.map(([name, file, bg]) => ({ key:"p:" + name, name, bg, photo:true,
       face:`<img src="img/princesses/${file}.jpg" alt="" draggable="false">` })),
     colors: () => COLORS.map(([id, name, hex, bg]) => ({ key:"c:" + id, name, face:`<span class="sw" style="--s:${hex}"></span>`, bg }))
   };
 
   const board = $("#board");
+  let total = 0;   // pairs in this game (a small picture set can have fewer than the level asks for)
   let cards = [], first = null, lock = false, moves = 0, found = 0, run = 0;
 
   const bestKey = () => `${M.theme}-${M.level}`;
@@ -32,15 +35,16 @@
 
   function updateStats(){
     $("#moves").textContent = moves;
-    $("#pairs").textContent = `${found} / ${L().pairs}`;
+    $("#pairs").textContent = `${found} / ${total}`;
     const b = M.best[bestKey()];
     $("#best").textContent = b ? `${b}` : "-";
   }
 
   function newGame(){
     run++; speech.cancel(); Sfx.stop();
-    const { pairs, cols } = L();
-    const picks = shuffle(POOLS[M.theme]()).slice(0, pairs);
+    const picks = shuffle(POOLS[M.theme]()).slice(0, L().pairs);
+    total = picks.length;
+    const cols = total <= 3 ? 3 : 4;
     cards = shuffle([...picks, ...picks].map((p, k) => ({ ...p, id:k })));
     first = null; lock = false; moves = 0; found = 0;
     board.style.setProperty("--cols", cols);
@@ -95,7 +99,7 @@
     updateStats();
     if (S.sfx) Sfx.play("cheer");
     buzz(20);
-    const win = found === L().pairs;
+    const win = found === total;
     if (win){ finish(); return; }
     await wait(500);
     if (mine !== run) return;
@@ -113,8 +117,8 @@
     save(); updateStats();
     $("#hint").hidden = true; $("#newBtn").hidden = true;
     $("#resultText").textContent = record && prev
-      ? `New best! All ${L().pairs} pairs in ${moves} moves.`
-      : `You found all ${L().pairs} pairs in ${moves} moves!`;
+      ? `New best! All ${total} pairs in ${moves} moves.`
+      : `You found all ${total} pairs in ${moves} moves!`;
     $("#result").hidden = false;
     await wait(500);
     if (mine !== run) return;
