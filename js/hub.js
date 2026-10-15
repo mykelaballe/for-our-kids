@@ -14,6 +14,8 @@
   };
   $("#colorStat").textContent = stat(data.colors, COLORS.length, `${COLORS.length} colors`);
   $("#numberStat").textContent = stat(data.numbers, NUMBERS.length, "1 to 10");
+  const outfits = data.dress.outfits;
+  $("#dressStat").textContent = outfits ? `👑 ${outfits} outfit${outfits === 1 ? "" : "s"}` : "Pick an outfit";
   const sliceWins = data.slice.wins;
   $("#sliceStat").textContent = sliceWins ? `🏆 ${sliceWins} win${sliceWins === 1 ? "" : "s"}` : "Swipe to slice";
   const dotWins = data.dots.wins;

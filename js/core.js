@@ -28,7 +28,8 @@ const PT = (() => {
     wheel:{ theme:"animals", spins:0 },
     shadow:{ level:"easy", theme:"animals", wins:0 },
     dots:{ level:"easy", wins:0 },
-    slice:{ level:"easy", wins:0, best:{} }
+    slice:{ level:"easy", wins:0, best:{} },
+    dress:{ char:"🐶", outfit:{ hat:"", eyes:"", neck:"" }, outfits:0 }
   };
   // Fill in anything missing from what was saved, keeping the saved values.
   function merge(def, saved){

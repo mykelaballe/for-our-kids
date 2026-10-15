@@ -1,0 +1,31 @@
+.friends{justify-content:center}
+.friends .chip{padding:6px 10px}
+.friends .chip .e{font-size:34px}
+.play{display:flex; flex-direction:column; align-items:center; gap:14px}
+.hint{margin:0; font-family:var(--display); font-weight:800; font-size:22px; text-align:center; text-wrap:balance; min-height:1.3em}
+.row{display:flex; gap:10px; flex-wrap:wrap; justify-content:center}
+
+/* The stage: the friend is one big emoji, and each thing worn is a smaller emoji placed on top. */
+.stage{
+  position:relative; width:min(100%, 360px, max(220px, calc(100svh - 470px))); aspect-ratio:1;
+  border-radius:32px; background:var(--c, #FFE9A8); box-shadow:0 6px 0 rgba(43,35,64,.22);
+  container-type:inline-size; overflow:hidden; cursor:pointer; -webkit-user-select:none; user-select:none;
+}
+.stage span{position:absolute; left:50%; line-height:1; pointer-events:none; transform:translateX(-50%)}
+.stage .who{top:50%; font-size:62cqw; transform:translate(-50%, -50%)}
+.stage .on-hat{top:3%; font-size:34cqw; transform:translateX(-50%) rotate(-8deg)}
+.stage .on-eyes{top:35%; font-size:34cqw}
+.stage .on-neck{top:66%; font-size:28cqw}
+.stage .worn{animation:wear .45s cubic-bezier(.3,1.6,.5,1)}
+@keyframes wear{from{opacity:0; transform:translateX(-50%) translateY(-40%) scale(.4)}}
+
+.tray{display:grid; grid-template-columns:repeat(auto-fit, minmax(76px, 1fr)); gap:10px; width:min(100%, 520px)}
+.opt-btn{
+  aspect-ratio:1; border:none; border-radius:22px; background:var(--c); color:var(--card-ink);
+  font-size:40px; line-height:1; display:grid; place-items:center; box-shadow:0 5px 0 rgba(43,35,64,.22);
+}
+.opt-btn:active{transform:translateY(3px); box-shadow:0 2px 0 rgba(43,35,64,.22)}
+.opt-btn[aria-pressed="true"]{outline:4px solid var(--good); outline-offset:-4px}
+.chip .e{font-size:22px}
+
+@media (prefers-reduced-motion: reduce){.stage .worn{animation:none}}
