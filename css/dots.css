@@ -1,0 +1,43 @@
+.chip small{font-weight:700; font-size:12px; opacity:.7}
+.play{display:flex; flex-direction:column; align-items:center; gap:16px}
+.score{display:flex; justify-content:center; gap:10px; flex-wrap:wrap}
+.stat-pill{
+  display:flex; align-items:center; gap:8px; padding:8px 16px; border-radius:999px; background:var(--paper-2);
+  font-family:var(--display); font-weight:800; font-size:20px; font-variant-numeric:tabular-nums;
+}
+.hint{margin:0; font-family:var(--display); font-weight:800; font-size:22px; text-align:center; text-wrap:balance}
+
+.dots{
+  display:block; width:min(100%, 520px, max(280px, calc(100svh - 360px))); aspect-ratio:1;
+  touch-action:manipulation; -webkit-user-select:none; user-select:none; border-radius:24px;
+  background:var(--paper-2); box-shadow:0 6px 0 rgba(43,35,64,.18);
+}
+.dots .fill{fill:var(--c); stroke:none; opacity:0; transition:opacity .5s}
+.dots .fill.show{opacity:1}
+.dots .line{fill:none; stroke:var(--sun); stroke-width:2.4; stroke-linecap:round; stroke-linejoin:round}
+.dots .dot{cursor:pointer; outline:none}
+.dots .hit{fill:transparent}
+.dots .ring{fill:var(--paper); stroke:var(--ink); stroke-width:1.1}
+.dots .num{text-anchor:middle; dominant-baseline:central; font-family:var(--display); font-weight:800; font-size:6.6px; fill:var(--ink); pointer-events:none}
+.dots .dot.next .ring{fill:#FFE27A; stroke-width:1.6; animation:beat 1s ease-in-out infinite; transform-box:fill-box; transform-origin:center}
+.dots .dot.next .num{fill:#2B2340}
+.dots .dot.done .ring{fill:var(--sun); stroke:var(--sun)}
+.dots .dot.done .num{fill:#2B2340}
+.dots .dot:focus-visible .ring{stroke:var(--focus); stroke-width:2}
+.dots .dot.no .ring{animation:shake .35s}
+.dots .reveal{text-anchor:middle; dominant-baseline:central; font-size:38px; pointer-events:none; opacity:0}
+.dots .reveal.show{opacity:1; animation:grow .6s cubic-bezier(.3,1.5,.5,1)}
+@keyframes beat{50%{transform:scale(1.22)}}
+@keyframes shake{25%{transform:translateX(-1.5px)} 75%{transform:translateX(1.5px)}}
+@keyframes grow{from{transform:scale(.3)}}
+.dots .reveal{transform-box:fill-box; transform-origin:center}
+
+.result{
+  display:flex; flex-direction:column; align-items:center; gap:12px; text-align:center;
+  background:var(--paper-2); border-radius:24px; padding:18px 22px; width:min(100%, 420px);
+}
+.result-text{margin:0; font-family:var(--display); font-weight:800; font-size:26px; line-height:1.15; text-wrap:balance}
+@media (prefers-reduced-motion: reduce){
+  .dots .fill{transition:none}
+  .dots .dot.next .ring,.dots .dot.no .ring,.dots .reveal.show{animation:none}
+}

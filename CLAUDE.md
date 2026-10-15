@@ -15,7 +15,7 @@ A static web app of toddler learning games, built for the owner's kids. Plain HT
 - Node and Python are not installed on this machine. To syntax-check a script, use `osascript -l JavaScript` with `new Function(source)`.
 
 ## Layout
-- `index.html` game menu. `animals.html`, `alphabet.html`, `shapes.html`, `colors.html`, `numbers.html`, `memory.html`, `maze.html`, `wheel.html`, `shadow.html` are the games.
+- `index.html` game menu. `animals.html`, `alphabet.html`, `shapes.html`, `colors.html`, `numbers.html`, `memory.html`, `maze.html`, `wheel.html`, `shadow.html`, `dots.html` are the games.
 - `css/base.css` shared tokens, buttons, settings sheet, timer cover. Each game adds its own small stylesheet.
 - `js/core.js` (`PT`) saving, speech, theme, mode tabs, celebrations. `js/audio.js` all sounds, synthesized in the browser. `js/timer.js` play timer. `js/data.js` all animals, letters, shapes, colors, numbers and princesses.
 - Progress and settings are saved in `localStorage` under `playtime.v2`.
