@@ -1,0 +1,41 @@
+.chip small{font-weight:700; font-size:12px; opacity:.7}
+.play{display:flex; flex-direction:column; align-items:center; gap:16px}
+.score{display:flex; justify-content:center; gap:10px; flex-wrap:wrap}
+.stat-pill{
+  display:flex; align-items:center; gap:8px; padding:8px 16px; border-radius:999px; background:var(--paper-2);
+  font-family:var(--display); font-weight:800; font-size:20px; font-variant-numeric:tabular-nums;
+}
+.hint{margin:0; font-family:var(--display); font-weight:800; font-size:22px; text-align:center; text-wrap:balance}
+.row{display:flex; gap:10px; flex-wrap:wrap; justify-content:center}
+
+/* The maze is one SVG. Dragging happens on it, so the browser must not scroll or zoom. */
+.maze{
+  display:block; width:min(100%, 520px, max(280px, calc(100svh - 340px))); aspect-ratio:1;
+  touch-action:none; -webkit-user-select:none; user-select:none; border-radius:24px;
+  background:var(--paper-2); box-shadow:0 6px 0 rgba(43,35,64,.18);
+}
+.maze:focus-visible{outline:4px solid var(--focus); outline-offset:4px}
+.maze .walls{stroke:var(--ink); stroke-width:5; stroke-linecap:round; fill:none}
+.maze .pad{stroke:none}
+.maze .start{fill:#FFE9A8}
+.maze .end{fill:#C6E59B}
+.maze .trail,.maze .hintline{fill:none; stroke-linecap:round; stroke-linejoin:round}
+.maze .trail{stroke:var(--sun); stroke-width:10; opacity:.75}
+.maze .hintline{stroke:var(--focus); stroke-width:7; stroke-dasharray:1 14; opacity:0; transition:opacity .3s}
+.maze .hintline.show{opacity:1}
+.maze text{text-anchor:middle; dominant-baseline:central; pointer-events:none; font-size:28px}
+.maze .player{transition:transform .12s ease-out}
+.maze .goal.cheer{animation:bounce .5s ease 2}
+@keyframes bounce{50%{transform:translateY(-6px) scale(1.2)}}
+.maze .goal{transform-box:fill-box; transform-origin:center}
+
+.result{
+  display:flex; flex-direction:column; align-items:center; gap:12px; text-align:center;
+  background:var(--paper-2); border-radius:24px; padding:18px 22px; width:min(100%, 420px);
+}
+.result-text{margin:0; font-family:var(--display); font-weight:800; font-size:26px; line-height:1.15; text-wrap:balance}
+
+@media (prefers-reduced-motion: reduce){
+  .maze .player,.maze .hintline{transition:none}
+  .maze .goal.cheer{animation:none}
+}

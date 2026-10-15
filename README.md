@@ -13,6 +13,7 @@ Double-click `index.html` to open it in any browser. No account, server or insta
 - **Fun Colors** (`colors.html`): *Paint* with a finger-painting studio (tap a pot to hear the color), *Pop* balloons of the color you are asked for, and a *Quiz*.
 - **Counting Fun** (`numbers.html`): *Train* (scroll a number train, tap a wagon to count what it carries), *Feed* a hungry hippo exactly the number of cookies it asks for, and a *Quiz*.
 - **Match Up** (`memory.html`): flip cards to find pairs. Pick animals, letters, shapes, colors or princesses, and easy (3 pairs), medium (6) or hard (8). Matching an animal plays its sound; best scores are saved per theme and level.
+- **Maze Path** (`maze.html`): drag a little animal through a freshly made maze to its treat (mouse to cheese, puppy to bone and so on). Easy is 5x5, medium 7x7, hard 9x9. Arrow keys work too, and "Show me the way" draws the shortest route (breadth-first search) for a few seconds. Mazes won are saved. Code: `js/maze.js`, `css/maze.css`.
 
 ## Play timer
 The hourglass button in every top bar sets a play timer (5 to 60 minutes). The time left shows on the button. When it runs out, a full-screen cover blocks the whole page. A grown-up solves a small multiplication sum to add time or stop the timer. The end time is saved, so reloading the page or switching games does not get around it. Code: `js/timer.js`.

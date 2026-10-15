@@ -23,7 +23,8 @@ const PT = (() => {
     colors:{ mode:"learn", last:0, stars:0, best:0, seen:{}, done:0 },
     numbers:{ mode:"learn", last:0, stars:0, best:0, seen:{}, done:0 },
     timer:{ endsAt:0, total:0 },
-    memory:{ level:"easy", theme:"animals", best:{}, wins:0 }
+    memory:{ level:"easy", theme:"animals", best:{}, wins:0 },
+    maze:{ level:"easy", wins:0, won:{} }
   };
   // Fill in anything missing from what was saved, keeping the saved values.
   function merge(def, saved){
