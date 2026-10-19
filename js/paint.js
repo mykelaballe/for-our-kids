@@ -120,12 +120,11 @@
   const sky = $("#sky");
   let balloons = [], raf = 0, lastT = 0, spawnIn = 0, target = null, roundColors = [], popped = 0, prevTarget = -1;
   let paused = false, lastSpoke = 0, rounds = 0;
-  const NEED = 3;
 
   function hud(){
     $("#gsw").style.setProperty("--s", target[2]);
     $("#gtext").textContent = `Pop the ${target[1].toLowerCase()} balloons!`;
-    $("#pips").innerHTML = Array.from({ length:NEED }, (_, k) => `<span class="pip${k < popped ? " on" : ""}"></span>`).join("");
+    $("#pips").textContent = popped ? `${popped} popped` : "";
     $("#pstars").textContent = B.stars;
   }
 
@@ -191,20 +190,16 @@
     if (S.sfx) Sfx.play("pop");
     buzz(12);
     $("#pmsg").textContent = "";
-    if (popped < NEED){ speech.say(String(popped)); return; }
-    // round won
-    paused = true; B.stars++; save(); hud();
-    const mine = ++run;
+    // No limit: keep popping. A star every 5 pops, a cheer every 15.
+    if (popped % 5 !== 0){ if (popped < 10) speech.say(String(popped)); return; }
+    B.stars++; save(); hud();
     markSeen(target[0]);
     if (S.sfx) Sfx.play("cheer");
-    rounds++;
-    if (rounds % 3 === 0) celebrate("Pop pop pop!");
-    await speech.say(`You popped all the ${target[1].toLowerCase()} balloons!`);
-    if (mine !== run) return;
-    balloons.forEach(x => { if (!x.popped){ x.vy = 260; } });   // the rest float away
-    await wait(1100);
-    if (mine === run) newTarget();
+    if (popped % 15 === 0) celebrate("Pop pop pop!");
   }
+
+  // Tap the goal to switch to another color whenever you like.
+  $(".goal").addEventListener("click", () => { if (sky.clientHeight) newTarget(); });
 
   PT.modeDefs.game = {
     enter(){
