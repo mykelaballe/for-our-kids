@@ -17,7 +17,7 @@ const PT = (() => {
   const KEY = "playtime.v2";
   const DEFAULTS = {
     settings:{ theme:"system", voice:true, sfx:true, words:true, autoplay:true, choices:3, letterCase:"upper" },
-    animals:{ group:"farm", seen:{}, done:{} },
+    animals:{ group:"farm", mode:"learn", stars:0, best:0, seen:{}, done:{} },
     abc:{ mode:"learn", last:0, stars:0, best:0, seen:{}, doneLearn:false },
     shapes:{ mode:"learn", last:0, stars:0, best:0, seen:{}, doneLearn:false },
     colors:{ mode:"learn", last:0, stars:0, best:0, seen:{}, done:0 },

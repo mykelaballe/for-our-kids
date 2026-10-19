@@ -151,12 +151,133 @@
     if (key === "words") document.body.classList.toggle("no-words", !S.words);
     if (key === "voice" && !S.voice) speech.cancel();
     if (key === "sfx" && !S.sfx) Sfx.stop();
+    if (key === "choices" && sw.current === "quiz" && !locked) newRound();
   });
   PT.twoTap($("#resetBtn"), "Tap again to clear", () => {
-    A.seen = {}; A.done = {}; save();
+    A.seen = {}; A.done = {}; A.stars = 0; A.best = 0; streak = 0; updateScore(); save();
     updateShelf();
     toast("Stickers cleared");
   });
 
+  /* ---------- quiz ---------- */
+  // Two kinds of question: hear a sound and pick the animal,
+  // or see an animal and pick its name.
+  const ALL = ANIMAL_GROUPS.flatMap(g => g.animals).filter(a => Sfx.has(a[3]));
+  const CHOICE_COLORS = ["#FFB8C6", "#9FD3FF", "#FFE27A", "#B8F08A"];
+  let bag = [], q = null, streak = 0, locked = false;
+  const article = name => /^[aeiou]/i.test(name) ? "an" : "a";
+
+  function draw(){
+    if (!bag.length) bag = shuffle(ALL.map((_, k) => k));
+    let k = bag.pop();
+    if (q && k === q.k && bag.length){ bag.unshift(k); k = bag.pop(); }
+    return k;
+  }
+
+  function newRound(){
+    const k = draw();
+    const n = S.choices === 4 ? 4 : 3;
+    const others = shuffle(ALL.map((_, j) => j).filter(j => j !== k && ALL[j][0] !== ALL[k][0])).slice(0, n - 1);
+    q = { k, type:Math.random() < .5 ? "sound" : "picture", opts:shuffle([k, ...others]) };
+    locked = false;
+
+    const [name, emoji, , , color] = ALL[k];
+    const prompt = $("#prompt");
+    prompt.style.setProperty("--c", color);
+    prompt.innerHTML = "";
+    const add = (cls, html) => {
+      const s = document.createElement("span");
+      s.className = cls; if (html != null) s.innerHTML = html;
+      prompt.appendChild(s); return s;
+    };
+    if (q.type === "sound"){
+      add("pe", "🔊");
+      add("ph", "Who makes this sound? Tap to hear it again.");
+      prompt.setAttribute("aria-label", "Who makes this sound?");
+    } else {
+      add("pe", emoji);
+      add("ph", "Which animal is this? Tap to hear it again.");
+      prompt.setAttribute("aria-label", "Which animal is this?");
+    }
+
+    const box = $("#choices");
+    box.className = "choices" + (q.type === "picture" ? " list" : n === 4 ? " four" : "");
+    box.innerHTML = "";
+    q.opts.forEach((j, pos) => {
+      const [oname, oemoji] = ALL[j];
+      const b = document.createElement("button");
+      b.className = "choice chunky" + (q.type === "sound" ? " pic" : "");
+      b.style.setProperty("--c", CHOICE_COLORS[pos % CHOICE_COLORS.length]);
+      b.textContent = q.type === "sound" ? oemoji : oname;
+      b.setAttribute("aria-label", oname);
+      b.addEventListener("click", () => choose(j, b));
+      box.appendChild(b);
+    });
+    $("#msg").textContent = "";
+    ask();
+  }
+
+  async function ask(){
+    stopAll();
+    const mine = run;
+    if (q.type === "sound"){
+      if (S.sfx) Sfx.play(ALL[q.k][3]);
+      else speech.say(ALL[q.k][2]);
+    } else {
+      speech.say("Which animal is this?");
+    }
+  }
+
+  function updateScore(){
+    $("#stars").textContent = A.stars;
+    $("#streak").textContent = streak;
+  }
+
+  async function choose(j, btn){
+    if (locked) return;
+    const name = ALL[q.k][0];
+    if (j !== q.k){
+      streak = 0; updateScore();
+      btn.classList.add("wrong"); btn.disabled = true;
+      $("#msg").textContent = "Try again!";
+      if (S.sfx) Sfx.play("oops");
+      buzz([25, 40, 25]);
+      speech.say("Try again.");
+      return;
+    }
+    locked = true;
+    stopAll();
+    const mine = run;
+    streak++; A.stars++;
+    if (streak > A.best) A.best = streak;
+    save(); updateScore();
+    btn.classList.add("right");
+    [...$("#choices").children].forEach(b => { b.disabled = true; });
+    $("#msg").textContent = `Yes! It's ${article(name)} ${name.toLowerCase()}!`;
+    if (S.sfx) Sfx.play("cheer");
+    buzz(20);
+    if (streak % 5 === 0) setTimeout(() => celebrate(`${streak} in a row!`), 400);
+    await wait(450);
+    if (mine !== run) return;
+    await speech.say(`Yes! It's ${article(name)} ${name}.`);
+    if (mine !== run) return;
+    await wait(600);
+    if (mine === run && sw.current === "quiz") newRound();
+  }
+
+  $("#prompt").addEventListener("click", () => { if (q && !locked) ask(); });
+
+  PT.modeDefs.learn = {
+    enter(){ show(); },
+    leave(){ stopAll(); }
+  };
+  PT.modeDefs.quiz = {
+    enter(){ streak = 0; updateScore(); bag = []; q = null; newRound(); },
+    leave(){ stopAll(); }
+  };
+  const sw = PT.modeSwitcher(A);
+
   setGroup(group);
+  updateScore();
+  sw.set(A.mode === "quiz" ? "quiz" : "learn");
 })();

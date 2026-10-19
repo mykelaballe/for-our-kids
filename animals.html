@@ -14,6 +14,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito:wght@500;700;800&display=swap">
 <link rel="stylesheet" href="css/base.css">
 <link rel="stylesheet" href="css/deck.css">
+<link rel="stylesheet" href="css/quiz.css">
 </head>
 <body>
 <div class="wrap">
@@ -25,6 +26,12 @@
     <button class="icon-btn" id="setBtn" aria-label="Grown-up settings"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 4h-7M10 4H3M21 12h-9M8 12H3M21 20h-5M12 20H3M14 2v4M8 10v4M16 18v4"/></svg></button>
   </header>
 
+  <nav class="chips" aria-label="Ways to play">
+    <button class="chip" data-mode="learn" aria-pressed="true"><span class="e" aria-hidden="true">🃏</span>Cards</button>
+    <button class="chip" data-mode="quiz" aria-pressed="false"><span class="e" aria-hidden="true">🎯</span>Quiz</button>
+  </nav>
+
+  <div id="mode-learn">
   <nav class="chips" id="groups" aria-label="Animal groups"></nav>
 
   <section class="stage" aria-label="Animal card">
@@ -52,6 +59,19 @@
     <div class="shelf-head"><h2 id="shelfTitle">Farm animals</h2><span class="shelf-meta" id="shelfMeta"></span></div>
     <div class="grid" id="grid"></div>
   </section>
+  </div>
+
+  <div id="mode-quiz" hidden>
+    <section class="quiz" aria-label="Animal game">
+      <div class="score">
+        <span class="stat-pill" aria-label="Stars"><span aria-hidden="true">⭐</span><span id="stars">0</span></span>
+        <span class="stat-pill" aria-label="In a row"><span aria-hidden="true">🔥</span><span id="streak">0</span></span>
+      </div>
+      <button class="prompt chunky" id="prompt"></button>
+      <div class="choices" id="choices"></div>
+      <p class="msg" id="msg" aria-live="polite"></p>
+    </section>
+  </div>
 </div>
 
 <dialog class="sheet" id="settings" aria-labelledby="setTitle">
@@ -60,6 +80,12 @@
     <p class="note">Saved on this device for every game.</p>
         <label class="opt">Say names out loud <input type="checkbox" id="optVoice" data-setting="voice"></label>
         <label class="opt">Play sounds <input type="checkbox" id="optSfx" data-setting="sfx"></label>
+        <div class="opt" id="optChoicesRow">Answers to pick from
+      <div class="seg" role="radiogroup" aria-label="Answers to pick from">
+        <label><input type="radio" name="choices" value="3" data-setting="choices"><span>3</span></label>
+        <label><input type="radio" name="choices" value="4" data-setting="choices"><span>4</span></label>
+      </div>
+    </div>
         <label class="opt">Play by itself after a swipe <input type="checkbox" id="optAuto" data-setting="autoplay"></label>
     <label class="opt">Show the sound words <input type="checkbox" id="optWords" data-setting="words"></label>
     <div class="opt">Look
@@ -70,7 +96,7 @@
       </div>
     </div>
     <div class="sheet-actions">
-      <button class="btn quiet" id="resetBtn">Clear stickers</button>
+      <button class="btn quiet" id="resetBtn">Clear stars and stickers</button>
       <button class="btn" data-close>Done</button>
     </div>
   </div>

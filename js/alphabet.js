@@ -108,7 +108,7 @@
     const mine = run, el = cardEls[i];
     const [L, word, , , sound] = LETTERS[i];
     el.classList.remove("pop", "speaking"); void el.offsetWidth; el.classList.add("pop");
-    const ok = await speech.say(`${L}. ${L} is for ${word}.`);
+    const ok = await speech.say(`${L} is for ${word}.`);
     if (!ok || mine !== run) return;
     el.classList.remove("speaking"); void el.offsetWidth; el.classList.add("speaking");
     if (sound && S.sfx) Sfx.play(sound);
